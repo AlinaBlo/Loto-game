@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <title>הגרלת הלוטו</title>
+    <style>
+
+        @font-face {
+            font-family: 'VarelaRound-Regular';
+            src: url('font/Varela_Round/VarelaRound-Regular.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'VarelaRound-Regular';
+            direction: rtl;
+            text-align: center;
+        }
+
+        .col-8 {
+            color: white;
+            font-size: 35px;
+            margin-top: 20px;
+        }
+
+        .Header{
+            background-color:red;
+            height:100px;
+        }
+
+        .col-3 {
+            color: white;
+            margin-top: 15px;
+            font-size: 20px;
+        }
+        
+        #money{
+            color:yellow;
+            font-weight:bold;
+            
+
+        }
+
+        .col-6 {
+            font-size: 20px;
+            
+        }
+
+        #pick {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #2458e6;
+            font-size: 40px;
+            height: 80px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: red;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            transition: all 0.1s;
+        }
+
+            button:hover {
+                background-color: #a90000;
+                padding-right: 25px;
+            }
+
+        button:active {
+            background-color: yellow;
+            color:black;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+
+        .personResult .col-3
+        {
+            background-color:#ffff86;
+            height:70px;
+            color:black;
+            
+        }
+        #win{
+            background-color: #32cc7c;
+        }
+
+
+    </style>
+
+    <script>
+
+        function getNums() {
+
+            var person = document.getElementById("money").innerHTML;
+            var regularNum = document.getElementById("regularNum").value;
+            var strongNum = document.getElementById("strongNum").value;
+
+            var message = document.getElementById("win/lose").innerHTML;
+            message = "לא זכית";
+            document.getElementById("Pregular").style.color = "black";
+            document.getElementById("Pstrong").style.color = "black";
+            document.getElementById("regular").style.color = "black";
+            document.getElementById("strong").style.color = "black";
+            document.getElementById("Pregular").style.fontWeight = "normal";
+            document.getElementById("Pstrong").style.fontWeight = "normal";
+            document.getElementById("regular").style.fontWeight = "normal";
+            document.getElementById("strong").style.fontWeight = "normal";
+
+            if (person >= 50) {
+                if ((regularNum > 0 && regularNum < 11) && (strongNum > 0 && strongNum < 11)) {
+                    var x = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+                    var y = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+                    
+                    if (regularNum == x && strongNum == y) {
+                        person = parseInt(person) + parseInt(1000);
+                        message = "זכית בשניהם 1000 שקלים"
+                        document.getElementById("Pregular").style.color = "blue";
+                        document.getElementById("Pstrong").style.color = "blue";
+                        document.getElementById("regular").style.color = "blue";
+                        document.getElementById("strong").style.color = "blue";
+                        document.getElementById("Pregular").style.fontWeight = "bold";
+                        document.getElementById("Pstrong").style.fontWeight = "bold";
+                        document.getElementById("regular").style.fontWeight = "bold";
+                        document.getElementById("strong").style.fontWeight = "bold";
+                        winPic(1000);
+
+                    }
+                    else if (regularNum != x && strongNum == y) {
+                        person = parseInt(person) + parseInt(250);
+                        message = "זכית במספר החזק 250 שקלים";
+                        document.getElementById("Pstrong").style.color = "blue";
+                        document.getElementById("strong").style.color = "blue";
+                        document.getElementById("Pstrong").style.fontWeight = "bold";
+                        document.getElementById("strong").style.fontWeight = "bold";
+                        winPic(250);
+                    }
+                    else if (regularNum == x && strongNum != y) {
+                        person = parseInt(person) + parseInt(100);
+                        message = "זכית במספר הרגיל 100 שקלים";
+                        document.getElementById("Pregular").style.color = "blue";
+                        document.getElementById("regular").style.color = "blue";
+                        document.getElementById("Pregular").style.fontWeight = "bold";
+                        document.getElementById("regular").style.fontWeight = "bold";
+                        winPic(100);
+                    }
+                    else {
+
+                        person = parseInt(person) - 50;
+                        winPic(0);
+                    }
+                    
+
+                    document.getElementById("win/lose").innerHTML = message;
+                    document.getElementById("Pregular").innerHTML = regularNum;
+                    document.getElementById("Pstrong").innerHTML = strongNum;
+                    document.getElementById("regular").innerHTML = x;
+                    document.getElementById("strong").innerHTML = y;
+                    document.getElementById("money").innerHTML = person;
+                }
+                else {
+                    alert("הכנסת מספרים לא בין 1-10")
+                }
+                document.getElementById("regularNum").value = "";
+                document.getElementById("strongNum").value = "";
+
+            }
+            else {
+                alert("אין לך מספיק כסף להשתתפות בהגרלה")
+            }
+
+            
+        }
+
+        
+        function winPic(other)
+        {
+            document.getElementById("1000w").style.visibility = "hidden";
+            document.getElementById("250w").style.visibility = "hidden";
+            document.getElementById("100w").style.visibility = "hidden";
+            document.getElementById("lose").style.visibility = "hidden";
+
+
+            if (other == 1000)
+            {
+                document.getElementById("1000w").style.visibility = "visible";
+            }
+            else if (other == 250)
+            {
+                document.getElementById("250w").style.visibility = "visible";
+            }
+            else if (other == 100)
+            {
+                document.getElementById("100w").style.visibility = "visible";
+            }
+            else
+            {
+                document.getElementById("lose").style.visibility = "visible";
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <!--The header-->
+    <div class="Header">
+        <div class="row">
+            <div class="col-8">
+                <span>
+                    ברוכים הבאים להגרלת הלוטו
+                </span>
+            </div>
+            <div class="col-3">
+                כמות הכסף
+                <p id="money">500</p>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <!--The input part-->
+    <br />
+    <div id="pick">אנא בחר 2 מספרים בין 1-10</div>
+    <br />
+    <div class="select">
+        <div class="row">
+            <div class="col-6">
+                הכנס מספר רגיל
+                <input type="text" id="regularNum" />
+            </div>
+            <div class="col-6">
+                הכנס מספר חזק
+                <input type="text" id="strongNum" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <button type="button" onclick="getNums()">להגרלה</button>
+    <br /><br />
+    <!--The result part-->
+    <div class="personResult">
+        <div class="row">
+            <div class="col-3">
+                מספר רגיל שנבחר
+                <p id="Pregular"></p><br />
+            </div>
+            <div class="col-3">
+                מספר חזק שנבחר
+                <p id="Pstrong"></p><br />
+            </div>
+            <div class="col-3" id="win">
+                מספר רגיל
+                <p id="regular"></p><br />
+            </div>
+            <div class="col-3" id="win">
+                מספר חזק
+                <p id="strong"></p><br />
+            </div>
+        </div>
+    </div>
+
+    <h5 id="win/lose"></h5>
+
+
+    <div id="pic">
+        <img src="photo/lose.gif" style="position:absolute; right:550px; visibility:hidden" id="lose"/>
+        <img src="photo/250.gif"  style="position:absolute; right:450px; visibility:hidden" id="250w" />
+        <img src="photo/1000.gif" style="position:absolute; right:430px; visibility:hidden"  id="1000w" />
+        <img src="photo/100.gif"  style="position:absolute; right:470px; visibility:hidden" id="100w" />
+    </div>
+
+
+</body>
+
+</html>
